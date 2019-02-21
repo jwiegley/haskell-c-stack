@@ -1,0 +1,50 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.1.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 6580caf16e591127fd040bd73002958d665fc1cd7e83eadf1de96d5559ee2516
+
+name:           haskell-c-stack
+version:        0.1.3
+synopsis:       Experiments to determine how the C stack relates to the Haskell FFI
+description:    Experiments to determine how the C stack relates to the Haskell FFI
+category:       System, Data, Nix
+homepage:       https://github.com/jwiegley/haskell-c-stack#readme
+bug-reports:    https://github.com/jwiegley/haskell-c-stack/issues
+author:         John Wiegley
+maintainer:     johnw@newartisans.com
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+
+source-repository head
+  type: git
+  location: https://github.com/jwiegley/haskell-c-stack
+
+library
+  exposed-modules:
+      Wrapper
+  other-modules:
+      Paths_haskell_c_stack
+  ghc-options: -Wall -Werror
+  cc-options: -Wall
+  include-dirs:
+      ./.
+  c-sources:
+      cbits.c
+  build-depends:
+      base
+    , bindings-DSL
+  default-language: Haskell2010
+
+executable haskell-c-stack
+  main-is: Main.hs
+  other-modules:
+      Paths_haskell_c_stack
+  ghc-options: -Wall -Werror -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , haskell-c-stack
+  default-language: Haskell2010

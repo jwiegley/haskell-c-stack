@@ -1,0 +1,38 @@
+name:       haskell-c-stack
+version:    0.1.3
+synopsis:   Experiments to determine how the C stack relates to the Haskell FFI
+github:     jwiegley/haskell-c-stack
+author:     John Wiegley
+maintainer: johnw@newartisans.com
+category:   System, Data, Nix
+license:    BSD3
+
+description:
+  Experiments to determine how the C stack relates to the Haskell FFI
+
+ghc-options:
+  - -Wall
+  - -Werror
+
+library:
+  exposed-modules:
+    - Wrapper
+  c-sources:
+    - cbits.c
+  cc-options:
+    - -Wall
+  include-dirs:
+    - .
+  dependencies:
+    - base
+    - bindings-DSL
+
+executables:
+  haskell-c-stack:
+    main: Main.hs
+    ghc-options:
+      - -threaded
+      - -with-rtsopts=-N
+    dependencies:
+      - base
+      - haskell-c-stack
